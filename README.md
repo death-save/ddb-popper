@@ -29,6 +29,17 @@ Note 2: when you close the character sheet, it will close the DDB Popper window
 
 ## KNOWN ISSUES
 
-[Issues](https://github.com/death-save/ddb-popper/issues)
+[Issues Log](https://github.com/death-save/ddb-popper/issues)
 
 * Initiative rolls from D&D Beyond (via [Beyond20](https://beyond20.here-for-more.info/)) break the Combat Tracker for that encounter. *Workaround* have players roll initiative from the combat tracker in Foundry, or leave their initiative un-rolled and the module will roll it automatically on round 1
+
+## Comments/Feedback/Issues?
+
+I can be reached on the [Foundry discord](https://discord.gg/XJUS4tZ) @errational#2007
+You can report issues to me directly on discord or by creating an issue in the [Issue Log](https://github.com/death-save/ddb-popper/issues/)
+
+## Donations
+
+I work on Foundry modules as a hobby. If you'd like to support my work you can use the link below:
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/evanc)
