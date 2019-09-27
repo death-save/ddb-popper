@@ -23,20 +23,20 @@ class DDBPopper {
             }
         }  
     }
-    /*
+    
     get defaultActorSheet() {
         const classes = Object.values(CONFIG.Actor.sheetClasses.character);
         const defaultSystemSheetClass = classes.find(c => c.default).id;
         const defaultSheetClass = defaultSystemSheetClass.split(".")[1];
         return defaultSheetClass;
     }
-    */
+    
 
     /**
      * Hooks on render of the default Actor sheet in order to insert the DDB Button
      */
     _hookRenderActorSheet() {
-        Hooks.on("renderActorSheet5eCharacter", (app, html, data) => {
+        Hooks.on(`render${this.defaultActorSheet}`, (app, html, data) => {
             this._addDDBButton(app, html, data);
         });
     }
