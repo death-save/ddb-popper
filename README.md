@@ -9,8 +9,7 @@ Adds a button to the 5e Actor Sheet that opens a popup of the matching D&D Beyon
 1. From the Foundry setup page click Addon Modules
 2. Click Install Module
 3. Paste the link to the json (https://raw.githubusercontent.com/death-save/ddb-popper/master/module.json) into the box
-4. Activate the module by clicking the checkmark next to it in the module list
-5. Activate the module within any worlds you wish to use it in by clicking the checkmark next to it in Setup > Manage Modules
+4. Activate the module within any worlds you wish to use it in by clicking the checkmark next to it in Setup > Manage Modules
 
 
 ## How to use it
