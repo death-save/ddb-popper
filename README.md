@@ -2,20 +2,16 @@
 
 ![DDB Popper Demo](https://github.com/death-save/ddb-popper/blob/master/ddb_popper.gif)
 
-[**Download Module Zip**](https://github.com/death-save/ddb-popper/raw/master/ddb-popper.zip)
-
 ## What it does
 Adds a button to the 5e Actor Sheet that opens a popup of the matching D&D Beyond character for the actor.
 
 ## How to install it
-1. Download the [**zip file**](https://github.com/death-save/ddb-popper/raw/master/ddb-popper.zip)
-2. Unzip into the /public/modules/ folder in your Foundry VTT installation
+1. From the Foundry setup page click Addon Modules
+2. Click Install Module
+3. Paste the link to the json (https://raw.githubusercontent.com/death-save/ddb-popper/master/module.json) into the box
+4. Activate the module by clicking the checkmark next to it in the module list
+5. Activate the module within any worlds you wish to use it in by clicking the checkmark next to it in Setup > Manage Modules
 
-It should look like this when installed:
-
-![Modules Folder](https://imgur.com/uMKy5vf.png)
-
-![DDB Popper Folder](https://imgur.com/9Tal5jl.png)
 
 ## How to use it
 
@@ -29,5 +25,11 @@ It should look like this when installed:
 4. From now on when you click the **DDB** button on that actor sheet it will open the D&D Beyond popup or "focus" it if it is already open
 ![DDB Popup](https://imgur.com/6VbOPIm.png)
 
-Note: if you want to change/remove the URL for an actor, simply right-click the **DDB** button to open the form again
+Note 1: if you want to change/remove the URL for an actor, simply right-click the **DDB** button to open the form again
+Note 2: when you close the character sheet, it will close the DDB Popper window
 
+## KNOWN ISSUES
+
+[Issues](https://github.com/death-save/ddb-popper/issues)
+
+* Initiative rolls from D&D Beyond (via [Beyond20](https://beyond20.here-for-more.info/)) break the Combat Tracker for that encounter. *Workaround* have players roll initiative from the combat tracker in Foundry, or leave their initiative un-rolled and the module will roll it automatically on round 1
