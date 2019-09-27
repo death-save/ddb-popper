@@ -24,7 +24,7 @@ Adds a button to the 5e Actor Sheet that opens a popup of the matching D&D Beyon
 4. From now on when you click the **DDB** button on that actor sheet it will open the D&D Beyond popup or "focus" it if it is already open
 ![DDB Popup](https://imgur.com/6VbOPIm.png)
 
-Note 1: if you want to change/remove the URL for an actor, simply right-click the **DDB** button to open the form again
+Note 1: if you want to change/remove the URL for an actor, simply right-click the **DDB** button to open the form again    
 Note 2: when you close the character sheet, it will close the DDB Popper window
 
 ## KNOWN ISSUES/TODO
