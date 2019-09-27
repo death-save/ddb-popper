@@ -27,7 +27,7 @@ Adds a button to the 5e Actor Sheet that opens a popup of the matching D&D Beyon
 Note 1: if you want to change/remove the URL for an actor, simply right-click the **DDB** button to open the form again
 Note 2: when you close the character sheet, it will close the DDB Popper window
 
-## KNOWN ISSUES
+## KNOWN ISSUES/TODO
 
 [Issues Log](https://github.com/death-save/ddb-popper/issues)
 
