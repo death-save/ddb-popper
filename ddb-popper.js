@@ -15,18 +15,25 @@ class DDBPopper {
     static get CONFIG() {
         return {
             moduleName: "ddb-popper",
-            ddbLogo: "modules/ddb-popper/icons/dnd-beyond-b-red.png",
+            ddbLogo: "fab fa-d-and-d",
             aTitle: "left-click to open, right-click to change URL",
-            imgStyle: `vertical-align:middle;height:16px;margin-right:3px;margin-bottom:3px`,
             windowFeatures: "resizeable,scrollbars,location=no,width=768,height=968",
             flagNames: {
                 ddbURL: "ddbURL"
             }
         }  
     }
+    /*
+    get defaultActorSheet() {
+        const classes = Object.values(CONFIG.Actor.sheetClasses.character);
+        const defaultSystemSheetClass = classes.find(c => c.default).id;
+        const defaultSheetClass = defaultSystemSheetClass.split(".")[1];
+        return defaultSheetClass;
+    }
+    */
 
     /**
-     * Hooks on render of ActorSheet5eCharacter in order to insert the DDB Button
+     * Hooks on render of the default Actor sheet in order to insert the DDB Button
      */
     _hookRenderActorSheet() {
         Hooks.on("renderActorSheet5eCharacter", (app, html, data) => {
@@ -70,9 +77,9 @@ class DDBPopper {
          * jquery reference to the D&D Beyond button to add to the sheet
          */
         const ddbButton = $(
-            `<a class="ddb-popper" title=${DDBPopper.CONFIG.aTitle}>
-                <img src=${DDBPopper.CONFIG.ddbLogo} style=${DDBPopper.CONFIG.imgStyle} />
-                <span>DDB</span>
+            `<a class="ddb-popper" title="${DDBPopper.CONFIG.aTitle}">
+                <i class="${DDBPopper.CONFIG.ddbLogo}"></i>
+                <span> DDB</span>
             </a>`
         );
         
