@@ -1,10 +1,6 @@
-Hooks.on("ready", () => {
-    let ddbPopper = new DDBPopper();
-});
-
 class DDBPopper {
     constructor(){
-        this._hookRenderActorSheet();
+        this._hookOnRenderCharacterSheets();
         this.existingPopup = null;
     }
 
@@ -15,23 +11,43 @@ class DDBPopper {
     static get CONFIG() {
         return {
             moduleName: "ddb-popper",
-            ddbLogo: "modules/ddb-popper/icons/dnd-beyond-b-red.png",
+            ddbLogo: "fab fa-d-and-d",
             aTitle: "left-click to open, right-click to change URL",
-            imgStyle: `vertical-align:middle;height:16px;margin-right:3px;margin-bottom:3px`,
             windowFeatures: "resizeable,scrollbars,location=no,width=768,height=968",
             flagNames: {
                 ddbURL: "ddbURL"
             }
         }  
     }
+    
+    get defaultCharacterSheet() {
+        const classes = Object.values(CONFIG.Actor.sheetClasses.character);
+        const defaultSystemSheetClass = classes.find(c => c.default).id;
+        const defaultSheetClass = defaultSystemSheetClass.split(".")[1];
+        return defaultSheetClass;
+    }
+    
 
     /**
-     * Hooks on render of ActorSheet5eCharacter in order to insert the DDB Button
+     * Hooks on render of the default Actor sheet in order to insert the DDB Button
      */
-    _hookRenderActorSheet() {
-        Hooks.on("renderActorSheet5eCharacter", (app, html, data) => {
+    _hookOnRenderCharacterSheets() {
+        const sheetClasses = Object.values(CONFIG.Actor.sheetClasses.character);
+
+        for (let s of sheetClasses) {
+            if(s.id.includes("dnd5e")) {
+                const sheetClass = s.id.split(".")[1];
+                Hooks.on(`render${sheetClass}`, (app, html, data) => {
+                    this._addDDBButton(app, html, data);
+                });
+            }
+        }
+        
+        /*
+        Hooks.on(`render${this.defaultActorSheet}`, (app, html, data) => {
             this._addDDBButton(app, html, data);
         });
+        */
     }
 
     /**
@@ -70,14 +86,15 @@ class DDBPopper {
          * jquery reference to the D&D Beyond button to add to the sheet
          */
         const ddbButton = $(
-            `<a class="ddb-popper" title=${DDBPopper.CONFIG.aTitle}>
-                <img src=${DDBPopper.CONFIG.ddbLogo} style=${DDBPopper.CONFIG.imgStyle} />
-                <span>DDB</span>
+            `<a class="ddb-popper" title="${DDBPopper.CONFIG.aTitle}">
+                <i class="${DDBPopper.CONFIG.ddbLogo}"></i>
+                <span> DDB</span>
             </a>`
         );
         
         /**
          * Create an instance of the ddbButton before the close button
+         * Removes existing instances first to avoid duplicates
          */
         windowHeader.find('.ddb-popper').remove();
         windowCloseBtn.before(ddbButton);
@@ -184,3 +201,7 @@ class DDBURLEntryForm extends FormApplication {
     }
 
 }
+
+Hooks.on("ready", () => {
+    let ddbPopper = new DDBPopper();
+});

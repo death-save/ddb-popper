@@ -2,11 +2,11 @@
     "name": "ddb-popper",
     "title": "DDB Popper",
     "description": "Allows opening the D&D Beyond character sheet from a Foundry FVTT Actor",
-    "version": "1.1",
+    "version": "1.2",
     "author": "Evan Clarke (errational)",
     "systems": ["dnd5e"],
     "scripts": ["ddb-popper.js"],
-    "url": "https://github.com/death-save/fvtt-modules/ddb-popper",
+    "url": "https://github.com/death-save/ddb-popper",
     "manifest": "https://raw.githubusercontent.com/death-save/ddb-popper/master/module.json",
     "download": "https://github.com/death-save/ddb-popper/archive/master.zip"
 }
