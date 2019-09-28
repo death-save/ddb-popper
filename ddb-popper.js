@@ -1,10 +1,6 @@
-Hooks.on("ready", () => {
-    let ddbPopper = new DDBPopper();
-});
-
 class DDBPopper {
     constructor(){
-        this._hookRenderActorSheet();
+        this._hookOnRenderCharacterSheets();
         this.existingPopup = null;
     }
 
@@ -24,7 +20,7 @@ class DDBPopper {
         }  
     }
     
-    get defaultActorSheet() {
+    get defaultCharacterSheet() {
         const classes = Object.values(CONFIG.Actor.sheetClasses.character);
         const defaultSystemSheetClass = classes.find(c => c.default).id;
         const defaultSheetClass = defaultSystemSheetClass.split(".")[1];
@@ -35,10 +31,23 @@ class DDBPopper {
     /**
      * Hooks on render of the default Actor sheet in order to insert the DDB Button
      */
-    _hookRenderActorSheet() {
+    _hookOnRenderCharacterSheets() {
+        const sheetClasses = Object.values(CONFIG.Actor.sheetClasses.character);
+
+        for (let s of sheetClasses) {
+            if(s.id.includes("dnd5e")) {
+                const sheetClass = s.id.split(".")[1];
+                Hooks.on(`render${sheetClass}`, (app, html, data) => {
+                    this._addDDBButton(app, html, data);
+                });
+            }
+        }
+        
+        /*
         Hooks.on(`render${this.defaultActorSheet}`, (app, html, data) => {
             this._addDDBButton(app, html, data);
         });
+        */
     }
 
     /**
@@ -85,6 +94,7 @@ class DDBPopper {
         
         /**
          * Create an instance of the ddbButton before the close button
+         * Removes existing instances first to avoid duplicates
          */
         windowHeader.find('.ddb-popper').remove();
         windowCloseBtn.before(ddbButton);
@@ -191,3 +201,7 @@ class DDBURLEntryForm extends FormApplication {
     }
 
 }
+
+Hooks.on("ready", () => {
+    let ddbPopper = new DDBPopper();
+});
