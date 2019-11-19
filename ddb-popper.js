@@ -2,6 +2,7 @@ class DDBPopper {
     constructor(){
         this._hookOnRenderCharacterSheets();
         this.existingPopup = null;
+        this.dnd5eSheetClasses = [];
     }
 
     /**
@@ -16,7 +17,8 @@ class DDBPopper {
             windowFeatures: "resizeable,scrollbars,location=no,width=768,height=968",
             flagNames: {
                 ddbURL: "ddbURL"
-            }
+            },
+            template: "./modules/ddb-popper/template/ddb-popper.html"
         }  
     }
     
@@ -32,11 +34,13 @@ class DDBPopper {
      * Hooks on render of the default Actor sheet in order to insert the DDB Button
      */
     _hookOnRenderCharacterSheets() {
+        this.dnd5eSheetClasses = [];
         const sheetClasses = Object.values(CONFIG.Actor.sheetClasses.character);
 
         for (let s of sheetClasses) {
             if(s.id.includes("dnd5e")) {
                 const sheetClass = s.id.split(".")[1];
+                this.dnd5eSheetClasses.push(sheetClass);
                 Hooks.on(`render${sheetClass}`, (app, html, data) => {
                     this._addDDBButton(app, html, data);
                 });
@@ -76,6 +80,12 @@ class DDBPopper {
      * @param {Object} data -- the data of the actor
      */
     async _addDDBButton (app, html, data) {
+        /*
+        if (!this.dnd5eSheetClasses.includes(app.constructor.name)) {
+            return;
+        }
+        */
+
         /**
          * Finds the header and the close button
          */
@@ -169,7 +179,7 @@ class DDBURLEntryForm extends FormApplication {
         return mergeObject(super.defaultOptions, {
             id: "ddb-url",
             title: "D&D Beyond URL",
-            template: "public/modules/ddb-popper/template/ddb-popper.html",
+            template: DDBPopper.CONFIG.template,
             classes: ["sheet"],
             width: 500
         });
@@ -204,4 +214,5 @@ class DDBURLEntryForm extends FormApplication {
 
 Hooks.on("ready", () => {
     let ddbPopper = new DDBPopper();
+    console.log(CONFIG.Actor.sheetClasses.character);
 });
