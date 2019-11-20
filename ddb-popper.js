@@ -1,8 +1,14 @@
+/**
+ * Const namespace for module
+ */
+const DDBPOPPER = {};
+
 class DDBPopper {
     constructor(){
-        this._hookOnRenderCharacterSheets();
-        this.existingPopup = null;
         this.dnd5eSheetClasses = [];
+        this.existingPopup = null;
+
+        this._hookOnRenderCharacterSheets();    
     }
 
     /**
@@ -80,18 +86,6 @@ class DDBPopper {
      * @param {Object} data -- the data of the actor
      */
     async _addDDBButton (app, html, data) {
-        /*
-        if (!this.dnd5eSheetClasses.includes(app.constructor.name)) {
-            return;
-        }
-        */
-
-        /**
-         * Finds the header and the close button
-         */
-        const windowHeader = html.parent().parent().find(".window-header");
-        const windowCloseBtn = windowHeader.find(".close");
-
         /**
          * jquery reference to the D&D Beyond button to add to the sheet
          */
@@ -101,12 +95,28 @@ class DDBPopper {
                 <span> DDB</span>
             </a>`
         );
+
+        if (html.find(".ddb-popper").length > 0) {
+            return;
+        }
+        
+        if (!this.dnd5eSheetClasses.includes(app.constructor.name)) {
+            return;
+        }        
+
+
+        /**
+         * Finds the header and the close button
+         */
+        const windowHeader = html.find(".window-header");
+        const windowCloseBtn = windowHeader.find(".close");
+
+        
         
         /**
          * Create an instance of the ddbButton before the close button
          * Removes existing instances first to avoid duplicates
          */
-        windowHeader.find('.ddb-popper').remove();
         windowCloseBtn.before(ddbButton);
 
         /**
@@ -212,7 +222,17 @@ class DDBURLEntryForm extends FormApplication {
 
 }
 
-Hooks.on("ready", () => {
-    let ddbPopper = new DDBPopper();
+DDBPOPPER.createDDBPopperInstance = function() {
+    DDBPOPPER.instance = new DDBPopper();
     console.log(CONFIG.Actor.sheetClasses.character);
+}  
+
+Hooks.on("ready", () => {
+    if (game.data.version == "0.4.0") {
+        window.setTimeout(DDBPOPPER.createDDBPopperInstance, 500);
+    } else {
+        DDBPOPPER.createDDBPopperInstance();
+    }
+
+    
 });
